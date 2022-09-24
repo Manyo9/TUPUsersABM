@@ -1,0 +1,49 @@
+<app-header [titulo]="'Alta'"></app-header>
+<form>
+  <div class="mb-3">
+    <label for="inputName" class="form-label">Nombre</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputName"
+      name="name"
+      [(ngModel)]="usuario.name"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="inputPassword" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="inputPassword"
+      name="password"
+      [(ngModel)]="usuario.password"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="inputEmail" class="form-label">E-mail</label>
+    <input
+      type="email"
+      class="form-control"
+      id="inputEmail"
+      name="email"
+      [(ngModel)]="usuario.email"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="inputEdad" class="form-label">Edad</label>
+    <input
+      type="number"
+      class="form-control"
+      id="inputEdad"
+      name="edad"
+      [(ngModel)]="usuario.edad"
+    />
+  </div>
+  <div class="mb-3 form-check">
+    <input #activo type="checkbox" name="activo" class="form-check-input" id="activo" [(ngModel)]="usuario.activo" (change)="cambioCheckbox(activo.checked)"/>
+    <label class="form-check-label" for="activo">Activo?</label>
+  </div>
+  <button type="submit" class="btn btn-success" (click)="guardar()">Enviar</button>
+  <button type="submit" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</form>

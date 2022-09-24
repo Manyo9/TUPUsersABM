@@ -1,0 +1,27 @@
+<app-header [titulo]="'Lista'"></app-header>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Password</th>
+        <th scope="col">Email</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Activo</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let usuario of listado">
+            <th score="row">{{usuario.id}}</th>
+            <td>{{usuario.name}}</td>
+            <td>{{usuario.password}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.edad}}</td>
+            <td>{{usuario.activo}}</td>
+            <td>
+              <button class="btn btn-success" (click)="modificarUsuario(usuario.id)">Edit</button>
+              <app-baja-usuario [usuario]="usuario" (onDelete)="traerListado()"></app-baja-usuario>
+            </td>
+        </tr>
+    </tbody>
+  </table>

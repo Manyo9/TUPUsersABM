@@ -1,0 +1,87 @@
+ng new
+cd dentro de la app
+ng generate class /models/objeto1 # y los otros modelos necesarios
+
+ir a tsconfig.json, poner "strictPropertyInitialization": false,
+
+agregar bootstrap a index.html, css en head y js al ultimo en el body
+
+creo el servicio
+ng generate service /services/objeto1
+voy al servicio, borro providedIn root
+
+voy a app.module.ts, importo FormsModule y HttpClientModule
+import { HttpClientModule } from '@angular/common/http'
+
+voy al servicio, inyecto HttpClient en el constructor
+constructor(private http: HttpClient)
+tambien creo un par de atributos como ApiUrl
+creo los metodos para traer todos, uno, eliminar, borrar, modificara
+todos --> <Objeto>(url)
+uno --> <Objeto>(url, id)
+agregar --> <Objeto>(url, objeto)
+modificar --> <Objeto>(url/id, objeto)
+eliminar --> <Objeto>(url/id)
+
+voy a app module y agrego el service en el array de providers
+
+creo los componentes
+ng g c alta-obj
+ng g c baja-obj
+ng g c lista-obj
+ng g c modif-obj
+
+creo las rutas en app-routing.module.ts
+en app root tambien puedo ir pegando el navbar de boostrap
+
+hago el componente navbar y pego el navbar de bootstrap, usando routerlink y routerlinkactive
+
+hago el componente alta primero, implemento también onDestroy, inyecto el service
+hago un atributo para el objeto y hago una new subscription como atributo
+en ngOnInit hago un objeto nuevo, y en ngOnDestroy me desuscribo
+
+busco un form de boostrap, lo pego en el html
+para el metodo de guardar uso el metodo de add en la subscription
+dentro de ahi uso el metodo agregar del servicio, le paso el obj como parametro, y al lado uso el metodo subscribe
+dentro del metodo subscribe abro llaves e implemento. Puedo enviar un alert de success para el next y un alert de error para el error.
+también puedo inyectar un objeto tipo Router para redireccionar con la funcion navigate(['ruta'])
+implemento tambien un cancelar() que usa el router para devolverme al listado.
+
+ahora en el componente lista saco una tabla desde bootstrap y la dejo preparada con los headers
+inyecto el service y router, hago dos atributos, el listado de objetos y la suscripcion
+implemento onDstroy para desuscribirme
+hago el metodo para traer lista, con subs.add , service.metodo().subs({next: (resultado: Objeto[]) => this.listado = resultado;}) blabla
+pongo alerts
+
+implemento el metodo para traer lista en el onInit
+
+rapidamente implemento el componente para la baja
+implemento ondestroy que se desuscribe, instancio un usuario como input y un output onDelete new eventemitter, y la suscripcion
+inyecto el servicio, implemento el metodo que hace la request delete. En next se hace el emit, por parametro del service mando el id.
+el html es un botón que con el evento click ejecuta el metodo para borrar.
+
+luego voy e implemento el ngfor en la tabla, haciendo cada td un atributo. No olvidar el componente baja
+implemento tambien dentro del tag del app-baja que onDelete se refresque el listado
+
+ahora para el edit copypasteo el form de alta, cambio el header
+hago un atributo input con el objeto, y la suscripcion.
+inyecto service, router, y activatedRoute
+implemento ondestroy con desuscribir
+copypasteo el metodo cancelar desde el alta
+copypasteo el metodo guardar desde el alta, cambiando el metodo del service
+
+hago un método para cargar los elementos del form}
+luego con this.activatedroute.params.suscribe, dentro del next hago una constante id
+const id = params['id']; params es un parametro de la arrow function de next
+
+dentro del mismo next ahora si llamo al servicio con el metodo para obtener por id.
+ Su next tiene como parametro la respuesta que es un objeto del modelo, y dentro
+de su funcion lo asigno al objeto que es atributo.
+llamo al metodo para cargar form en oninit
+
+por ultimo hago otro metodo en el listado que se reciba un id y con el router lleve al form de edit
+this.router.navigate(['modificar', id]);
+
+y programo otro botón que cuando se haga click lo llame con el id. debe estar dentro del ngfor.
+
+ver que los metodos internos estén private
